@@ -4,14 +4,14 @@ from .models import ServiceType, Service
 
 # Create your views here.
 def services_list(request):
-    services = []
+    service_list = []
     service_types_list = ServiceType.objects.all()
 
     for s_type in service_types_list:
         services = Service.objects.filter(service_type=s_type)
-        services.append(services)
+        service_list.append(services)
 
-    dictionary = dict(zip(service_types_list, services))
+    dictionary = dict(zip(service_types_list, service_list))
     return render(
         request,
         'services/services_list.html',

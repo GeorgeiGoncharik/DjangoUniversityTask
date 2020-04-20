@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 
-def get_lol_page(request):
-    return render(request, 'lolpage.html')
+
+def homepage(request):
+    return render(request, 'homepage.html')

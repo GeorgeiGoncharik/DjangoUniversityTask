@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+  <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta name="description" content="Монтаж плинтуса, укладка паркета и паркетной доски, шлифовка и покрытие в Минске и Минской области">
+      <meta name="author" content="Georgei Goncharik">
+      <meta name="yandex-verification" content="9b86108c7be2c145"/>
+      <title>Паркетные работы в Минске и Минской области - Цены, Фото</title>
+
+      <style>
+        .preload{
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin: 0 -50% 0 0;
+            transform: translate(-50%, -50%);
+        }
+      </style>
+
+      <!-- jQuery -->
+      <script src="{% static "vendor/jquery/jquery.min.js" %}"></script>
+      <script>
+        $(window).on('load', function(){
+          $(".preload").delay(50).fadeOut(500, function(){
+            $(".content").fadeIn(700);
+          })
+        });
+      </script>
+  </head>
+
+  <body>
+    <!-- Bootstrap core CSS -->
+    <link href="{% static "vendor/bootstrap/css/bootstrap.min.css" %}" rel="stylesheet">
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="{% static "css/mainStyle.css" %}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css" integrity="sha384-i1LQnF23gykqWXg6jxC2ZbCbUMxyw5gLZY6UiUS98LYV5unm8GWmfkIS6jqJfb4E" crossorigin="anonymous">
+    <!-- Custom JavaScript -->
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="{% static "vendor/bootstrap/js/bootstrap.bundle.min.js" %}"></script>
+
+    <div class="preload">
+      <img src="{% static "img/Ripple-2s-200px.gif" %}" alt="">
+    </div>
+
+    <!-- Custom fonts for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Play&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Caveat&display=swap" rel="stylesheet">
+
+    <script>
+      $(function(){
+          $(document).scroll(function(){
+              var $nav = $("#mainNavbar");
+              $nav.toggleClass("scrolled", $(this).scrollTop() > $("#transitNavbar").offset().top - $(window).scrollTop());
+          })
+      })
+    </script>
+
+    <div class="content">
+
+    <nav id="mainNavbar" class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top py-2">
+        <div class="container">
+          <a class="navbar-brand" href="/">parkeet.by</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="products/">Товары</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="services/">Услуги</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="contacts/">Контакты</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+    </nav>
+
+    {% block content %}
+
+        <!--   Turn off scroll    -->
+        <style>
+            html, body{
+              margin: 0;
+              height: 100%;
+              overflow: hidden;
+            }
+        </style>
+
+      <!-- Base Page Header -->
+      <header class="masthead mt-0">
+          <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
+            <source src="{% static "vid/jumbo2.mp4" %}" type="video/mp4">
+          </video>
+          <div class="container h-100 masthead-content pb-5 pt-0">
+            <div class="d-flex h-100 text-center align-items-center pb-5 pt-0">
+              <div class="w-100 text-white pb-5 pt-0">
+                  <h1 class="masthead-heading masthead-text mb-0 mt-0">Паркетные работы</h1>
+                  <h3 class="masthead-subheading masthead-text mb-0 mt-0">В Минске и Минской Области</h3>
+                  <a href="services/" class="btn btn-primary btn-xl rounded-pill mt-5 mr-lg-4 mr-sm-1">Услуги</a>
+                  <a href="products/" class="btn btn-primary btn-xl rounded-pill mt-5 ml-lg-4 ml-sm-1">Товары</a>
+              </div>
+            </div>
+          </div>
+      </header>
+
+    {% endblock %}
+    </div>
+  </body>
+</html>

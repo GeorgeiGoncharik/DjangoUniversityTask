@@ -1,0 +1,91 @@
+{% extends "homepage.html" %}
+{% load static %}
+{% block title %}{% if category %}{{ category.name }}{% else %}Товары{% endif %}{% endblock %}
+{% block content %}
+    <style>
+        .jumbotron{
+            background: url("{% static "img/green.jpg" %}") no-repeat center center;
+            -webkit-background-size: 100% 100%;
+            -moz-background-size: 100% 100%;
+            -o-background-size: 100% 100%;
+            background-size: 100% 100%;
+        }
+    </style>
+
+    <style>
+    .sidenav {
+
+    }
+
+    .sidenav a {
+        padding: 6px 8px 6px 16px;
+        text-decoration: none;
+        font-size: 25px;
+        color: #818181;
+        display: block;
+    }
+    .sidenav a:hover {
+          color: #f1f1f1;
+    }
+
+    @media screen and (max-height: 450px) {
+      .sidenav {padding-top: 15px;}
+      .sidenav a {font-size: 18px;}
+    }
+    </style>
+
+    <div class="jumbotron">
+      <header class="masthead mt-0">
+          <div class="container h-100 masthead-content pb-5 pt-0">
+            <div class="d-flex h-100 text-center align-items-center pb-5 pt-0">
+              <div class="w-100 text-white pb-5 pt-0">
+                  <h1 class="masthead-heading masthead-text mb-0 mt-0 display-1">Товары</h1>
+                  <h3 class="masthead-subheading masthead-text mb-5 pb-5 mt-0 display-2">(лаки, наждак и многое другое)</h3>
+                  <a href="#start" class="btn btn-primary btn-xl rounded-pill mt-5"><i class="fas fa-arrow-down"></i></a>
+              </div>
+            </div>
+          </div>
+      </header>
+    </div>
+
+    <hr id="transitNavbar" class="my-5">
+
+    <h1 class="display-4 text-center">{% if category %}{{ category.name }}{% else %}Товары{% endif %}</h1>
+
+
+        <div class="row">
+
+            <div id="sidebar" class="sidenav col-md-2 pl-5 my-5">
+                <h3>Категории</h3>
+                    <a href="{% url "products:index" %}" {% if not category %}class="selected"{% endif %}>Все</a>
+                    {% for c in categories %}
+                        <a href="{{ c.get_absolute_url }}" {% if category.slug == c.slug %}class="selected"{% endif %}>{{ c.name }}</a>
+                    {% endfor %}
+            </div>
+
+            <div class="container col-md-10 my-5" id="start">
+                {% if products %}
+                    {% for product in products %}
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="card" style="width: 18rem;">
+                                  <a href="{{ product.get_absolute_url }}"><img class="card-img-top" src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/1200px-No_image_available.svg.png" %}{% endif %}"></a>
+                                  <div class="card-body">
+                                    <h5 class="card-title">{{ product.name }}</h5>
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    <a href="{{ product.get_absolute_url }}" class="btn btn-primary">Подробнее</a>
+                                    <p class="card-text">{{ product.price }}</p>
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <h2 class="text-center my-5">Кажется, мы все продали... или обанкротились</h2>
+                {% endif %}
+            </div>
+        </div>
+
+    {% include "footer.html" %}
+
+{% endblock %}

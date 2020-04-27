@@ -30,7 +30,7 @@ SECRET_KEY = 'zc%zqx52v9c(@7yf3t=6n95e^3$+bd1ld%6d-!b$o!l$t=9x%y'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['goshanchik.xyz', 'www.goshanchik.xyz', '192.168.100.1', '192.168.100.18']
+ALLOWED_HOSTS = ['goshanchik.xyz', 'www.goshanchik.xyz', '192.168.100.1', '192.168.100.18', '127.0.0.1']
 
 
 # Application definition

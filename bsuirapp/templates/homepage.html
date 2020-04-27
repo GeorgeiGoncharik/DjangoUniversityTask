@@ -7,7 +7,7 @@
       <meta name="description" content="Монтаж плинтуса, укладка паркета и паркетной доски, шлифовка и покрытие в Минске и Минской области">
       <meta name="author" content="Georgei Goncharik">
       <meta name="yandex-verification" content="9b86108c7be2c145"/>
-      <title>Паркетные работы в Минске и Минской области - Цены, Фото</title>
+      <title>{% block title %}Паркетные работы в Минске и Минской области - Цены, Фото {% endblock %}</title>
 
       <style>
         .preload{
@@ -50,6 +50,17 @@
     <link href="https://fonts.googleapis.com/css?family=Play&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Caveat&display=swap" rel="stylesheet">
 
+    {# other stuff #}
+	<link rel="icon" type="image/png" href="{% static "img/icons/favicon.ico" %}"/>
+	<link rel="stylesheet" type="text/css" href="{% static "fonts/font-awesome-4.7.0/css/font-awesome.min.css" %}">
+	<link rel="stylesheet" type="text/css" href="{% static "fonts/Linearicons-Free-v1.0.0/icon-font.min.css" %}">
+	<link rel="stylesheet" type="text/css" href="{% static  "vendor/animate/animate.css" %}">
+	<link rel="stylesheet" type="text/css" href="{% static "vendor/css-hamburgers/hamburgers.min.css" %}">
+	<link rel="stylesheet" type="text/css" href="{% static "vendor/animsition/css/animsition.min.css" %}">
+	<link rel="stylesheet" type="text/css" href="{% static "vendor/select2/select2.min.css" %}">
+	<link rel="stylesheet" type="text/css" href="{% static "vendor/daterangepicker/daterangepicker.css" %}">
+
+
     <script>
       $(function(){
           $(document).scroll(function(){
@@ -61,29 +72,13 @@
 
     <div class="content">
 
-    <nav id="mainNavbar" class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top py-2">
-        <div class="container">
-      <a class="navbar-brand" href="{% url 'homepage_view' %}">parkeet.by</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-              <li class="nav-item">
-                <a class="nav-link" href="products/">Товары</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="services/">Услуги</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="contacts/">Контакты</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-    </nav>
+    {% block navbar %}
+        {% include "main_navbar.html" %}
+    {% endblock %}
+
 
     {% block content %}
+
 
         <!--   Turn off scroll    -->
         <style>
@@ -104,8 +99,8 @@
               <div class="w-100 text-white pb-5 pt-0">
                   <h1 class="masthead-heading masthead-text mb-0 mt-0">Паркетные работы</h1>
                   <h3 class="masthead-subheading masthead-text mb-0 mt-0">В Минске и Минской Области</h3>
-                  <a href="services/" class="btn btn-primary btn-xl rounded-pill mt-5 mr-lg-4 mr-sm-1">Услуги</a>
-                  <a href="products/" class="btn btn-primary btn-xl rounded-pill mt-5 ml-lg-4 ml-sm-1">Товары</a>
+                  <a href="{% url 'services:index' %}" class="btn btn-primary btn-xl rounded-pill mt-5 mr-lg-4 mr-sm-1">Услуги</a>
+                  <a href="{% url 'products:index' %}" class="btn btn-primary btn-xl rounded-pill mt-5 ml-lg-4 ml-sm-1">Товары</a>
               </div>
             </div>
           </div>

@@ -48,14 +48,14 @@
       </header>
     </div>
 
-    <hr id="transitNavbar" class="my-5">
+    <hr class="my-5">
 
-    <h1 class="display-4 text-center">{% if category %}{{ category.name }}{% else %}Товары{% endif %}</h1>
+    <h1 id="transitNavbar" class="display-4 text-center">{% if category %}{{ category.name }}{% else %}Товары{% endif %}</h1>
 
+    <div class="container-fluid">
+            <div class="row">
 
-        <div class="row">
-
-            <div id="sidebar" class="sidenav col-md-2 pl-5 my-5">
+            <div id="sidebar" class="sidenav col-12 col-md-3 pl-5 my-5">
                 <h3>Категории</h3>
                     <a href="{% url "products:index" %}" {% if not category %}class="selected"{% endif %}>Все</a>
                     {% for c in categories %}
@@ -63,28 +63,32 @@
                     {% endfor %}
             </div>
 
-            <div class="container col-md-10 my-5" id="start">
+            <div class="container col-12 col-md-9 my-5" id="start">
                 {% if products %}
+                    <div class="row">
                     {% for product in products %}
-                        <div class="row">
                             <div class="col-md-4">
-                                <div class="card" style="width: 18rem;">
+                                <div class="card mb-4 shadow-sm">
                                   <a href="{{ product.get_absolute_url }}"><img class="card-img-top" src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/1200px-No_image_available.svg.png" %}{% endif %}"></a>
                                   <div class="card-body">
                                     <h5 class="card-title">{{ product.name }}</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <a href="{{ product.get_absolute_url }}" class="btn btn-primary">Подробнее</a>
-                                    <p class="card-text">{{ product.price }}</p>
+                                    <p class="card-text">{{ product.get_short_description }}</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <a class="btn w-50 btn-dark mr-5 rounded-pill py-2 btn-block" href="{{ product.get_absolute_url }}" role="button">Подробнее</a>
+                                        <p class="w-50 card-text">{{ product.price }} руб.</p>
+                                    </div>
                                   </div>
                                 </div>
                             </div>
-                        </div>
                     {% endfor %}
+                    </div>
                 {% else %}
                     <h2 class="text-center my-5">Кажется, мы все продали... или обанкротились</h2>
                 {% endif %}
             </div>
         </div>
+    </div>
+
 
     {% include "footer.html" %}
 

@@ -36,6 +36,9 @@ class Product(models.Model):
         return reverse('products:product_detail',
                        args=[self.id, self.slug])
 
+    def get_short_description(self):
+        return self.description[:100] + '... '
+
     class Meta:
         ordering = ('name',)
         index_together = (('id', 'slug'),)

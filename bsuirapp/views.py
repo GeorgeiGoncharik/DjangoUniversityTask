@@ -7,4 +7,5 @@ def homepage(request):
 
 
 def contacts(request):
-    return render(request, 'contacts.html')
+    # return render(request, 'contacts.html')
+    return HttpResponse('<h1>Будет позже</h1>')

@@ -32,7 +32,9 @@
       .sidenav {padding-top: 15px;}
       .sidenav a {font-size: 18px;}
     }
+
     </style>
+
 
     <div class="jumbotron">
       <header class="masthead mt-0">
@@ -50,12 +52,12 @@
 
     <hr class="my-5">
 
-    <h1 id="transitNavbar" class="display-4 text-center">{% if category %}{{ category.name }}{% else %}Товары{% endif %}</h1>
+    <h1 id="transitNavbar" class="display-4 text-center">{% if category %}{{ category.name }}{% else %}Материалы{% endif %}</h1>
 
     <div class="container-fluid">
             <div class="row">
 
-            <div id="sidebar" class="sidenav col-12 col-md-3 pl-5 my-5">
+            <div id="sidebar" class="sidenav col-12 col-md-4 col-lg-2 pl-md-5 my-2 my-md-5 text-center text-md-left">
                 <h3>Категории</h3>
                     <a href="{% url "products:index" %}" {% if not category %}class="selected"{% endif %}>Все</a>
                     {% for c in categories %}
@@ -63,12 +65,12 @@
                     {% endfor %}
             </div>
 
-            <div class="container col-12 col-md-9 my-5" id="start">
+            <div class="container col-12 col-md-8 col-lg-10 my-5" id="start">
                 {% if products %}
                     <div class="row">
                     {% for product in products %}
-                            <div class="col-md-4">
-                                <div class="card mb-4 shadow-sm">
+                            <div class="col-md-6 col-lg-4 col-xl-3 mb-4 ">
+                                <div class="card shadow-sm">
                                   <a href="{{ product.get_absolute_url }}"><img class="card-img-top" src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/1200px-No_image_available.svg.png" %}{% endif %}"></a>
                                   <div class="card-body">
                                     <h5 class="card-title">{{ product.name }}</h5>

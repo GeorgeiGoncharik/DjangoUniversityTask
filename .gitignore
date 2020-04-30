@@ -1,2 +1,9 @@
+# IDE
 .idea/
-bsuirapp/__pycache__/
+
+# DB
+*.sqlite3
+
+# Python
+__pycache__/
+*.py[cod]

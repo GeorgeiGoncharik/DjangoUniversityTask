@@ -142,5 +142,4 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 STATIC_ROOT = '/home/xxcktcgz/public_html/static'
-# MEDIA_ROOT = '/home/xxcktcgz/public_html/media' to return before push
-MEDIA_ROOT = '/home/georgei/Documents/'
+MEDIA_ROOT = '/home/xxcktcgz/public_html/media'

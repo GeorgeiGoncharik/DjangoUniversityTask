@@ -4,17 +4,20 @@
 {% block main_navbar_id %}{% endblock %}
 {% block dark_navbar %}scrolled{% endblock %}
 {% block content %}
-
+        <style>
+            html, body{min-height:100%;}
+            body{height:100vh;}
+        </style>
         <div class="container my-5">
             <div class="row" style="margin-top: 100px">
             <div class="col-12 col-md-5 d-flex justify-content-center align-items-center">
-                <img class="img-fluid" src="{% if product.image %}{% static "img/hde51-4.jpg" %}{% else %}{% static "img/1200px-No_image_available.svg.png" %}{% endif %}">
+                <img class="img-fluid" src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/1200px-No_image_available.svg.png" %}{% endif %}">
             </div>
             <div class="col-12 col-md-7 text-center text-md-left">
                 <h2>{{ product.name }}</h2>
                 <h2><a href="{{ product.category.get_absolute_url }}">{{product.category }}</a></h2>
                 <hr>
-                <p class="price">{{ product.price }} руб. за м2</p>
+                <p class="price">{{ product.price }} руб. за {{ product.measure_type }}</p>
                 <form action="{% url "cart:cart_add" product.id %}" method="post">
                     {{ cart_product_form }}
                     {% csrf_token %}
@@ -30,4 +33,3 @@
     {% include "footer.html" %}
 {% endblock %}
 
-{#{{ product.image.url }}#}

@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'services.apps.ServicesConfig',
     'products.apps.ProductsConfig',
-    'cart.apps.CartConfig'
+    'cart.apps.CartConfig',
+    'orders.apps.OrdersConfig'
 ]
 
 MIDDLEWARE = [
@@ -70,6 +71,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'cart.context_processors.cart',
             ],
         },
     },
@@ -110,6 +112,13 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'mail.goshanchik.xyz'
+EMAIL_HOST_USER = 'confirmation@goshanchik.xyz'
+EMAIL_HOST_PASSWORD = 'xDFn5S5ZFUH8cRZ'
+EMAIL_PORT = 465
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
@@ -133,4 +142,5 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 STATIC_ROOT = '/home/xxcktcgz/public_html/static'
-MEDIA_ROOT = '/home/xxcktcgz/public_html/media'
+# MEDIA_ROOT = '/home/xxcktcgz/public_html/media' to return before push
+MEDIA_ROOT = '/home/georgei/Documents/'

@@ -1,0 +1,5 @@
+{% autoescape off %}
+Hi, мы получили твой заказ №{{ order.id }} на ремонтик,
+Кликни по ссылке, чтобы подтвердить серьезность твоих намерений,
+https://{{ domain }}{% url 'orders:verify' uidb64=uid token=token %}
+{% endautoescape %}

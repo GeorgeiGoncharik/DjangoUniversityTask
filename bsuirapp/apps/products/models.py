@@ -28,6 +28,18 @@ class Product(models.Model):
     image = models.ImageField(upload_to='products/%Y/%m/%d', blank=True)
     description = models.TextField(blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
+    LINEAR = 'п.м.'
+    SQUARE = 'м²'
+    UNIT = 'ед.'
+    MEASUREMENT_TYPE_CHOICES = [
+        (LINEAR, 'п.м.'),
+        (SQUARE, 'м²'),
+        (UNIT, 'ед.')
+    ]
+    measure_type = models.CharField(
+        max_length=5,
+        choices=MEASUREMENT_TYPE_CHOICES
+    )
     available = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)

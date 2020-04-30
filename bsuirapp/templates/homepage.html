@@ -89,6 +89,20 @@
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'contacts' %}">Контакты</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'cart:cart_detail' %}">
+                    <i class="fas fa-tools"></i>:
+                    {% with total_items=cart|length %}
+                        {% if cart|length > 0 %}
+                            {#{{ total_items }},#}
+                            {{ cart.get_total_price }} руб.
+                        </a>
+                        {% else %}
+                            пусто! как так!?
+                        {% endif %}
+                    {% endwith %}
+                </a>
+              </li>
             </ul>
           </div>
         </div>

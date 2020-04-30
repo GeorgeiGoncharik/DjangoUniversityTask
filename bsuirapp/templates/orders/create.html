@@ -1,0 +1,16 @@
+{% extends "homepage.html" %}
+{% load static %}
+{% load static %}
+{% block title %}Оформление ремонта{% endblock %}
+{% block main_navbar_id %}{% endblock %}
+{% block dark_navbar %}scrolled{% endblock %}
+{% block content %}
+    <div class="d-flex justify-content-center align-items-center mt-5">
+        <form action="." method="post" class="order-form">
+        {{ form.as_p }}
+        <p><input type="submit" value="Place order"></p>
+        {% csrf_token %}
+        </form>
+    </div>
+
+{% endblock %}

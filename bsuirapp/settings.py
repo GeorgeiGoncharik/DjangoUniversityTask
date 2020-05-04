@@ -85,10 +85,17 @@ WSGI_APPLICATION = 'bsuirapp.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'OPTIONS': {
+            'sql_mode': 'traditional',
+            },
+        'NAME': 'xxcktcgz_parket_bsuir',
+        'USER': 'xxcktcgz_admin',
+        'PASSWORD': 'L&;%VPA##Z;N',
+        'HOST': 'localhost',
+        'PORT': '3306',
+        }
     }
-}
 
 CART_SESSION_ID = 'cart'
 

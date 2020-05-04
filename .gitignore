@@ -3,6 +3,7 @@
 
 # DB
 *.sqlite3
+*.json
 
 # Python
 __pycache__/

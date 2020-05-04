@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='product',
             name='measure_type',
-            field=models.CharField(choices=[('п.м.', 'п.м.'), ('м²', 'м²'), ('ед.', 'ед.')], default='default', max_length=5),
+            field=models.CharField(max_length=5),
             preserve_default=False,
         ),
     ]

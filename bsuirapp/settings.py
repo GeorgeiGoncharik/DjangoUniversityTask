@@ -30,7 +30,7 @@ SECRET_KEY = 'zc%zqx52v9c(@7yf3t=6n95e^3$+bd1ld%6d-!b$o!l$t=9x%y'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['goshanchik.xyz', 'www.goshanchik.xyz', '192.168.100.1', '192.168.100.18', '127.0.0.1']
+ALLOWED_HOSTS = ['goshanchik.xyz', 'www.goshanchik.xyz', '127.0.0.1']
 
 
 # Application definition
@@ -111,18 +111,25 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# will change later
+
+# EMAIL_USE_TLS = True
+# EMAIL_HOST = 'mail.goshanchik.xyz'
+# EMAIL_HOST_USER = 'confirmation@goshanchik.xyz'
+# EMAIL_HOST_PASSWORD = 'xDFn5S5ZFUH8cRZ'
+# EMAIL_PORT = 465
 
 EMAIL_USE_TLS = True
-EMAIL_HOST = 'mail.goshanchik.xyz'
-EMAIL_HOST_USER = 'confirmation@goshanchik.xyz'
-EMAIL_HOST_PASSWORD = 'xDFn5S5ZFUH8cRZ'
-EMAIL_PORT = 465
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'georgii.goncharik@gmail.com'
+EMAIL_HOST_PASSWORD = 'oqktwbxoazkdoysf'
+EMAIL_PORT = 587
 
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-ru'
 
 TIME_ZONE = 'UTC'
 

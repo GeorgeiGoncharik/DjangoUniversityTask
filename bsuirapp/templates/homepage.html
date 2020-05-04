@@ -17,6 +17,20 @@
             margin: 0 -50% 0 0;
             transform: translate(-50%, -50%);
         }
+        html, body {
+          height: 100%;
+        }
+        body {
+          display: flex;
+          flex-direction: column;
+        }
+        .main {
+          flex: 1 0 auto;
+        }
+
+        .footer {
+          flex-shrink: 0;
+        }
       </style>
 
       <!-- jQuery -->
@@ -69,10 +83,11 @@
           })
       })
     </script>
-
     <div class="content">
 
-    <nav id="{% block main_navbar_id %}mainNavbar{% endblock %}" class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top py-2 {% block dark_navbar %}{% endblock %}">
+
+      <div class="main">
+            <nav id="{% block main_navbar_id %}mainNavbar{% endblock %}" class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top py-2 {% block dark_navbar %}{% endblock %}">
         <div class="container">
       <a class="navbar-brand" href="{% url 'homepage_view' %}">parkeet.by</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -107,59 +122,48 @@
           </div>
         </div>
     </nav>
-
-
-    {% block content %}
+        {% block content %}
         <!--   Turn off scroll    -->
-        <style>
-            html, body{
-              margin: 0;
-              height: 100%;
-              overflow: hidden;
-            }
-        </style>
+            <style>
+                html, body{
+                  margin: 0;
+                  height: 100%;
+                  overflow: hidden;
+                }
+            </style>
 
-      <!-- Base Page Header -->
-      <style>
-      .jumbotron{
-          background: url("{% static "img/gradient.png"%}") no-repeat center center;
-          -webkit-background-size: 100% 100%;
-          -moz-background-size: 100% 100%;
-          -o-background-size: 100% 100%;
-          background-size: 100% 100%;
-      }
-    </style>
-{#    <div class="jumbotron">#}
-{#      <header class="masthead mt-0">#}
-{#          <div class="container h-100 masthead-content pb-5 pt-0">#}
-{#            <div class="d-flex h-100 text-center align-items-center pb-5 pt-0">#}
-{#              <div class="w-100 text-white pb-5 pt-0">#}
-{#                  <h1 class="display-4 mb-0 mt-0">Паркетные работы</h1>#}
-{#                  <h3 class="display-4 mb-0 mt-0">В Минске и Минской Области</h3>#}
-{#                  <a href="{% url 'services:index' %}" class="btn btn-primary btn-xl rounded-pill mt-5 mr-lg-4 mr-sm-1">Услуги</a>#}
-{#                  <a href="{% url 'products:index' %}" class="btn btn-primary btn-xl rounded-pill mt-5 ml-lg-4 ml-sm-1">Материалы</a>#}
-{#              </div>#}
-{#            </div>#}
-{#          </div>#}
-{#      </header>#}
-{#    </div>#}
-        <header class="masthead mt-0">
-          <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
-            <source src="{% static "vid/jumbo2.mp4" %}" type="video/mp4">
-          </video>
-          <div class="container h-100 masthead-content pb-5 pt-0">
-            <div class="d-flex h-100 text-center align-items-center pb-5 pt-0">
-              <div class="w-100 text-white pb-5 pt-0">
-                  <h1 class="display-4 mb-0 mt-0">Паркетные работы</h1>
-                  <h3 class="display-4 mb-0 mt-0">В Минске и Минской Области</h3>
-                  <a href="{% url 'services:index' %}" class="btn btn-primary btn-xl rounded-pill mt-5 mr-lg-4 mr-sm-1">Услуги</a>
-                  <a href="{% url 'products:index' %}" class="btn btn-primary btn-xl rounded-pill mt-5 ml-lg-4 ml-sm-1">Товары</a>
-              </div>
-            </div>
-          </div>
-      </header>
-    {% endblock %}
+          <!-- Base Page Header -->
+          <style>
+              .jumbotron{
+                  background: url("{% static "img/gradient.png"%}") no-repeat center center;
+                  -webkit-background-size: 100% 100%;
+                  -moz-background-size: 100% 100%;
+                  -o-background-size: 100% 100%;
+                  background-size: 100% 100%;
+              }
+            </style>
+            <header class="masthead mt-0">
+                  <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
+                    <source src="{% static "vid/jumbo2.mp4" %}" type="video/mp4">
+                  </video>
+                  <div class="container h-100 masthead-content pb-5 pt-0">
+                    <div class="d-flex h-100 text-center align-items-center pb-5 pt-0">
+                      <div class="w-100 text-white pb-5 pt-0">
+                          <h1 class="display-4 mb-0 mt-0">Паркетные работы</h1>
+                          <h3 class="display-4 mb-0 mt-0">В Минске и Минской Области</h3>
+                          <a href="{% url 'services:index' %}" class="btn btn-primary btn-xl rounded-pill mt-5 mr-lg-4 mr-sm-1">Услуги</a>
+                          <a href="{% url 'products:index' %}" class="btn btn-primary btn-xl rounded-pill mt-5 ml-lg-4 ml-sm-1">Материалы</a>
+                      </div>
+                    </div>
+                  </div>
+              </header>
+        {% endblock %}
+      </div>
+      <footer class="footer">
+          {% block footer %}
 
+          {% endblock %}
+      </footer>
     </div>
   </body>
 </html>

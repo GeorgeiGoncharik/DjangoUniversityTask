@@ -3,18 +3,12 @@
 {% block title %}{% if category %}{{ category.name }}{% else %}Товары{% endif %}{% endblock %}
 {% block content %}
     <style>
-        .jumbotron{
-            background: url("{% static "img/green.jpg" %}") no-repeat center center;
-            -webkit-background-size: 100% 100%;
-            -moz-background-size: 100% 100%;
-            -o-background-size: 100% 100%;
-            background-size: 100% 100%;
-        }
-    </style>
-
-    <style>
-    .sidenav {
-
+    .jumbotron{
+        background: url("{% static "img/mick-haupt-fdm17wr1dRA-unsplash.jpg" %}") no-repeat center center;
+        -webkit-background-size: 100% 100%;
+        -moz-background-size: 100% 100%;
+        -o-background-size: 100% 100%;
+        background-size: 100% 100%;
     }
 
     .sidenav a {
@@ -32,7 +26,6 @@
       .sidenav {padding-top: 15px;}
       .sidenav a {font-size: 18px;}
     }
-
     </style>
 
 
@@ -41,8 +34,7 @@
           <div class="container h-100 masthead-content pb-5 pt-0">
             <div class="d-flex h-100 text-center align-items-center pb-5 pt-0">
               <div class="w-100 text-white pb-5 pt-0">
-                  <h1 class="masthead-heading masthead-text mb-0 mt-0 display-1">Товары</h1>
-                  <h3 class="masthead-subheading masthead-text mb-5 pb-5 mt-0 display-2">(лаки, наждак и многое другое)</h3>
+                  <h1 class="display-4 mt-0 display-1">Материалы</h1>
                   <a href="#start" class="btn btn-primary btn-xl rounded-pill mt-5"><i class="fas fa-arrow-down"></i></a>
               </div>
             </div>
@@ -52,7 +44,7 @@
 
     <hr class="my-5">
 
-    <h1 id="transitNavbar" class="display-4 text-center">{% if category %}{{ category.name }}{% else %}Материалы{% endif %}</h1>
+    <h1 id="transitNavbar" class="display-4 text-center">{% if category %}{{ category.name }}{% else %}Все{% endif %}</h1>
 
     <div class="container-fluid">
             <div class="row">
@@ -90,8 +82,8 @@
             </div>
         </div>
     </div>
+{% endblock %}
 
-
+{% block footer %}
     {% include "footer.html" %}
-
 {% endblock %}

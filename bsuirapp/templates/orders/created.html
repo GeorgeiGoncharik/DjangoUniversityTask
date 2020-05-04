@@ -1,33 +1,17 @@
 {% extends "homepage.html" %}
 {% load static %}
-{% load static %}
 {% block title %}Спасибо за заявку!{% endblock %}
 {% block main_navbar_id %}{% endblock %}
 {% block dark_navbar %}scrolled{% endblock %}
 {% block content %}
-    <style>
-    html, body{min-height:100%;}
-    body{height:100vh;}
+<div class="row h-100">
+   <div class="col-sm-12 my-auto">
+       <h2 class="text-center center">Спасибо!</h2>
+       <h3 class="text-center">Мы отправили Вам e-mail с подтверждением. Проверьте, пожалуйста, вашу почту!</h3>
+   </div>
+</div>
+{% endblock %}
 
-    .center{
-        text-align: center;
-        align-items: center;
-        align-self: center;
-        justify-items: center;
-        justify-self: center;
-        justify-content: center;
-        place-items: center;
-        vertical-align: center;
-        line-height: 100%;
-        margin: auto;
-        position: absolute;
-        left: 50%;
-        right: 50%;
-        transform: translate(-50%, -50%);
-    }
-    </style>
-    <div class="container center">
-        <h1 class="display-1 text-center">Спасибо!</h1>
-        <h1>Мы отправили Вам e-mail с подтверждением. Проверьте, пожалуйста, вашу почту!</h1>
-    </div>
+{% block footer %}
+    {% include "footer.html" %}
 {% endblock %}

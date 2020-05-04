@@ -4,12 +4,6 @@
 {% block main_navbar_id %}{% endblock %}
 {% block dark_navbar %}scrolled{% endblock %}
 {% block content %}
-  <style>
-  body {
-      min-height: 100vh !important;
-    }
-  </style>
-
   <div class="container text-black mt-5 py-5 text-center">
         <h1 class="display-4">Ваш ремонт</h1>
   </div>
@@ -99,5 +93,8 @@
 
         </div>
       </div>
+{% endblock %}
+
+{% block footer %}
     {% include "footer.html" %}
 {% endblock %}

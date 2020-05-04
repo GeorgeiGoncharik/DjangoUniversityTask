@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from .models import ServiceType, Service
 
-
 # Create your views here.
 def services_list(request):
     service_list = []
@@ -15,4 +14,5 @@ def services_list(request):
     return render(
         request,
         'services/services_list.html',
-        {'service_types_list': dictionary})
+        {'service_types_list': dictionary}
+    )

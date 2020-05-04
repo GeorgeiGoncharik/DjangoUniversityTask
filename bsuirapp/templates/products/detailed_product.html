@@ -4,32 +4,30 @@
 {% block main_navbar_id %}{% endblock %}
 {% block dark_navbar %}scrolled{% endblock %}
 {% block content %}
-        <style>
-            html, body{min-height:100%;}
-            body{height:100vh;}
-        </style>
-        <div class="container my-5">
-            <div class="row" style="margin-top: 100px">
-            <div class="col-12 col-md-5 d-flex justify-content-center align-items-center">
-                <img class="img-fluid" src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/1200px-No_image_available.svg.png" %}{% endif %}">
-            </div>
-            <div class="col-12 col-md-7 text-center text-md-left">
-                <h2>{{ product.name }}</h2>
-                <h2><a href="{{ product.category.get_absolute_url }}">{{product.category }}</a></h2>
-                <hr>
-                <p class="price">{{ product.price }} руб. за {{ product.measure_type }}</p>
-                <form action="{% url "cart:cart_add" product.id %}" method="post">
-                    {{ cart_product_form }}
-                    {% csrf_token %}
-                    <input type="submit" value="В корзину">
-                </form>
-                <div class="mt-2">
-                    {{ product.description|linebreaks }}
-            </div>
-            </div>
-            </div>
-        </div>
+<div class="container my-5 d-flex justify-content-around align-self-center align-items-center h-100">
+    <div class="row" style="margin-top: 100px">
+    <div class="col-12 col-md-5">
+        <img class="img-fluid" src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/1200px-No_image_available.svg.png" %}{% endif %}">
+    </div>
+    <div class="col-12 col-md-7 text-center text-md-left">
+        <h2>{{ product.name }}</h2>
+        <h2><a href="{{ product.category.get_absolute_url }}">{{product.category }}</a></h2>
+        <hr>
+        <p class="price">{{ product.price }} руб. за {{ product.measure_type }}</p>
+        <form action="{% url "cart:cart_add" product.id %}" method="post">
+            {{ cart_product_form }}
+            {% csrf_token %}
+            <input type="submit" value="В корзину">
+        </form>
+        <div class="mt-2">
+            {{ product.description|linebreaks }}
+    </div>
+    </div>
+    </div>
+</div>
+{% endblock %}
 
+{% block footer %}
     {% include "footer.html" %}
 {% endblock %}
 

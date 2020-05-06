@@ -1,5 +1,7 @@
 {% autoescape off %}
-Hi, мы получили твой заказ №{{ order.id }} на ремонтик,
-Кликни по ссылке, чтобы подтвердить серьезность твоих намерений,
-https://{{ domain }}{% url 'orders:verify_order' uid64=uid token=token %}
+Hi, {{ order.first_name }},мы получили твой заказ №{{ order.id }}.
+Кликни по ссылке, чтобы мы скорее связались с тобой: https://{{ domain }}{% url 'orders:verify_order' uid64=uid token=token %}
+
+Время отправки: {{ time }}
+E-mail получателя: {{ order.email }}
 {% endautoescape %}

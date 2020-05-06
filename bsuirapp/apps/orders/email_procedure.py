@@ -1,49 +1,39 @@
-def render_template(template, **kwargs):
-    # check if template exists
-    import os, sys
-    if not os.path.exists(template):
-        print('No template file present: %s' % template)
-        sys.exit()
+from smtplib import SMTPException
+from django.contrib.sites.shortcuts import get_current_site
+from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_encode
+from django.template.loader import render_to_string
+from .tokens import order_activation_token
+from django.core.mail import EmailMessage
+import multiprocessing
+from datetime import datetime
+import logging
 
-    import jinja2
-    templateLoader = jinja2.FileSystemLoader(searchpath="/")
-    templateEnv = jinja2.Environment(loader=templateLoader)
-    templ = templateEnv.get_template(template)
-    return templ.render(**kwargs)
+logger = logging.getLogger(__name__)
+
+def send_verify_emails(order, request):
+    cur_site = get_current_site(request)
+    mail_subject = 'Подтверждение оформления ремонта.'
+    now = datetime.now()
+    message = render_to_string('orders/verify_order.html', {
+        'order': order,
+        'time': now.strftime("%d/%m/%Y, %H:%M:%S"),
+        'domain': cur_site.domain,
+        'uid': urlsafe_base64_encode(force_bytes(order.pk)).decode(),
+        'token': order_activation_token.make_token(order)
+    })
+
+    email = EmailMessage(
+        mail_subject, message, to=[order.email]
+    )
+    process = multiprocessing.Process(target=send_email, args=(email,))
+    process.start()
 
 
-def send_email(to, sender='georgii.goncharik@gmail.com', cc=None, bcc=None, subject=None, body=None):
-    import logging
-    import smtplib
-    # Import the email modules
-    from email.mime.multipart import MIMEMultipart
-    from email.mime.text import MIMEText
-    from email.header import Header
-    from email.utils import formataddr
-
-    # convert TO into list if string
-    if type(to) is not list:
-        to = to.split()
-
-    to_list = to + [cc] + [bcc]
-    to_list = filter(None, to_list)  # remove null emails
-
-    msg = MIMEMultipart('alternative')
-    msg['From'] = sender
-    msg['Subject'] = subject
-    msg['To'] = ','.join(to)
-    msg['Cc'] = cc
-    msg['Bcc'] = bcc
-    msg.attach(MIMEText(body, 'html'))
-    server = smtplib.SMTP('smtp.gmail.com')  # or your smtp server
-
-    # This retrieves a Python logging instance (or creates it)
-    log = logging.getLogger(__name__)
+def send_email(email):
+    logger.info('sending mail')
     try:
-        log.info('sending email xxx')
-        server.sendmail(sender, to_list, msg.as_string())
-    except Exception as e:
-        log.error('Error sending email')
-        log.exception(str(e))
-    finally:
-        server.quit()
+        email.send()
+        logger.info('email sent successfully.')
+    except SMTPException as e:
+        logger.error('there was an error sending an email: %s', e)

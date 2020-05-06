@@ -1,19 +1,17 @@
-from django.shortcuts import render, redirect
-from .models import OrderItem, Order
-from .forms import OrderCreateForm
+import logging
+
 from cart.cart import Cart
-
-
+from .email_procedure import send_verify_emails
 from django.http import HttpResponse
-from django.contrib.auth import login, authenticate
-from django.contrib.sites.shortcuts import get_current_site
-from django.utils.encoding import force_bytes, force_text
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.template.loader import render_to_string
-from .tokens import order_activation_token
-from django.contrib.auth.models import User
-from django.core.mail import EmailMessage
+from django.shortcuts import render
+from django.utils.encoding import force_text
+from django.utils.http import urlsafe_base64_decode
 
+from .forms import OrderCreateForm
+from .models import OrderItem, Order
+from .tokens import order_activation_token
+
+logger = logging.getLogger(__name__)
 
 # Create your views here.
 def order_create(request):
@@ -27,20 +25,10 @@ def order_create(request):
                                          product=item['product'],
                                          price=item['price'],
                                          quantity=item['quantity'])
-            cur_site = get_current_site(request)
-            mail_subject = 'Подтверждение оформления ремонта. '
-            message = render_to_string('orders/verify_order.html', {
-                'order': order,
-                'domain': cur_site.domain,
-                'uid': urlsafe_base64_encode(force_bytes(order.pk)).decode(),
-                'token': order_activation_token.make_token(order)
-            })
-            to_email = form.cleaned_data.get('email')
-            email = EmailMessage(
-                mail_subject, message, to=[to_email]
-            )
-            email.send()
+            logger.info('order created %s', order.id)
+            send_verify_emails(order, request)
             cart.clear()
+            logger.info('cart cleared.')
             return render(
                 request,
                 'orders/created.html',
@@ -61,10 +49,13 @@ def verify(request, uid64, token):
         order = Order.objects.get(pk=uid)
     except(TypeError, ValueError, OverflowError, Order.DoesNotExist):
         order = None
+        logger.error('no order found while verification')
     if order is not None and order_activation_token.check_token(order, token):
         order.verified = True
         order.save()
+        logger.info('order verified %s', order.id)
         return HttpResponse('Отлично! Мы обязательно свяжемся с Вами!')
     else:
+        logger.error('problem with verifying order')
         return HttpResponse('Упс. На проблемку напали!')
 

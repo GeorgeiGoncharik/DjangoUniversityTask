@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import sys
+import logging.config
+from django.utils.log import DEFAULT_LOGGING
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 from bsuirapp.apps import services
@@ -118,12 +120,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# will change later
+# почему-то не работает
 
 # EMAIL_USE_TLS = True
 # EMAIL_HOST = 'mail.goshanchik.xyz'
-# EMAIL_HOST_USER = 'confirmation@goshanchik.xyz'
-# EMAIL_HOST_PASSWORD = 'xDFn5S5ZFUH8cRZ'
+# EMAIL_HOST_USER = 'no-reply-verify@goshanchik.xyz'
+# EMAIL_HOST_PASSWORD = 'J!,]$V00_Vml'
 # EMAIL_PORT = 465
 
 EMAIL_USE_TLS = True
@@ -131,6 +133,56 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'georgii.goncharik@gmail.com'
 EMAIL_HOST_PASSWORD = 'oqktwbxoazkdoysf'
 EMAIL_PORT = 587
+
+#logging
+# Disable Django's logging setup
+LOGGING_CONFIG = None
+
+LOGLEVEL = os.environ.get('LOGLEVEL', 'info').upper()
+
+logging.config.dictConfig({
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'default': {
+            # exact format is not important, this is the minimum information
+            'format': '%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
+        },
+        'django.server': DEFAULT_LOGGING['formatters']['django.server'],
+    },
+    'handlers': {
+        # console logs to stderr
+        'console': {
+            'class': 'logging.StreamHandler',
+            'level': 'INFO',
+            'formatter': 'default',
+        },
+        'django.server': DEFAULT_LOGGING['handlers']['django.server'],
+    },
+    'loggers': {
+        # default for all undefined Python modules
+        '': {
+            'level': 'WARNING',
+            'handlers': ['console'],
+        },
+        # Our application code
+        # добавил пока в одно приложение только, ибо много времени уходит на это
+        'orders': {
+            'level': 'INFO',
+            'handlers': ['console'],
+            # Avoid double logging because of root logger
+            'propagate': False,
+        },
+        # Prevent noisy modules from logging to Sentry
+        'noisy_module': {
+            'level': 'ERROR',
+            'handlers': ['console'],
+            'propagate': False,
+        },
+        # Default runserver request logging
+        'django.server': DEFAULT_LOGGING['loggers']['django.server'],
+    },
+})
 
 
 # Internationalization
